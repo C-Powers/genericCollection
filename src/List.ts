@@ -1,13 +1,17 @@
 export default class List<T> {
-    private items: Array<T>;
+    // private items: Array<T>;
+    private items: T[];
 
-    constructor(_items: Array<T> = []) {
+    constructor(_items: T[] = []) {
         this.items = _items;
     }
 
-    push(inp: T): number {
-        this.items.push(inp);
-        return this.length();
+    length(): number {
+        let count: number = 0;
+        this.items.forEach((item: T) => {
+            count++;
+        });
+        return count;
     }
 
     splice(startIndex: number = undefined, take: number = 1): List<T> {
@@ -32,15 +36,14 @@ export default class List<T> {
         return newArr;
     }
 
-    // pop(): T {
+    forEach(callback: (x: T, y: number) => {}): void {
+        for (let i: number = 0; i < this.items.length; i++) {
+            callback(this.items[i], i);
+        }
+    }
 
-    // }
-
-    length(): number {
-        let count: number = 0;
-        this.items.forEach((item: T) => {
-            count++;
-        });
-        return count;
+    push(inp: T): number {
+        this.items.push(inp);
+        return this.length();
     }
 }

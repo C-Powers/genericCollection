@@ -1,19 +1,11 @@
 import List from "../src/List";
 
-test(".push should add an item to the list", () => {
-    const list: List<any> = new List();
-    expect(list.push("string")).toBe(1);
+test("index", () => {
+    const list: List<number> = new List([1, 2, 3, 4]);
+    expect(list[0]).toBe(1);
 });
 
-test(".pop should remove the last item from the collection, and return that item", () => {
-    const testList: Array<any> = [1, 2, "last"];
-    const list: List<any> = new List(testList);
-
-    expect(list.pop()).toBe(testList[-1]);
-    expect(list.length()).toBe(testList.length - 1);
-});
-
-test(".length the length of the collection", () => {
+test("length", () => {
     const list: List<any> = new List();
     expect(list.length()).toBe(0);
 
@@ -21,7 +13,7 @@ test(".length the length of the collection", () => {
     expect(list2.length()).toBe(1);
 });
 
-test("splice should remove items from array, and return the removed array", () => {
+test("splice", () => {
     const testList: Array<any> = [1, 2, "last"];
 
     const list1: List<any> = new List(testList);
@@ -32,4 +24,30 @@ test("splice should remove items from array, and return the removed array", () =
 
     const list3: List<any> = new List(testList);
     expect(list3.splice(0, 2).length()).toBe(2);
+});
+
+test("forEach", () => {
+    const list: List<number> = new List([1, 2, 3, 4]);
+
+    let test: number;
+    const testFunction: any = (a: any) => {
+        test = a;
+    };
+
+    list.forEach(testFunction);
+
+    expect(test).toBe(4);
+});
+
+test("push", () => {
+    const list: List<any> = new List();
+    expect(list.push("string")).toBe(1);
+});
+
+test("pop", () => {
+    const testList: Array<number> = [1, 2, 3];
+    const list: List<number> = new List(testList);
+
+    expect(list.pop()).toBe(testList[testList.length - 1]);
+    expect(list.length()).toBe(testList.length - 1);
 });
