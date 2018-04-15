@@ -36,18 +36,29 @@ export default class List<T> {
     return this.Len();
   }
 
-  pop(): void {
+  pop(): T {
     if (this.items.length === 0) {
       return;
     }
-    delete this.items[this.items.length];
+    const lastInd = this.items.length - 1;
+    const returnVal = this.items[lastInd];
+
+    this.items.splice(0, lastInd);
+    return returnVal;
   }
 
-  shift(): void {
+  shift(): T {
     if (this.items.length === 0) {
       return;
     }
-    delete this.items[0];
+
+    const retVal = this.items[0];
+    this.items.splice(0, 1);
+    return retVal;
+  }
+
+  unshift(): T[] {
+    return [];
   }
 
   indexOf(val: T): number {
@@ -57,7 +68,7 @@ export default class List<T> {
         pos = index;
       }
     });
-    return pos;
+    return pos || -1;
   }
 
   splice(startIndex: number = undefined, take: number = 1): List<T> {
