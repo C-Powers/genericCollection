@@ -60,7 +60,6 @@ describe("shift", () => {
     list.shift();
     expect(list.Len()).toEqual(2);
 
-    console.log("list0", list[0]);
     expect(list.indexOf(1)).toEqual(-1);
   });
 
@@ -69,5 +68,26 @@ describe("shift", () => {
     const list: List<number> = new List(testList);
 
     expect(list.shift()).toEqual(1);
+  });
+});
+
+describe("Unshift", () => {
+  test("adds item to the beginning of array", () => {
+    const testList: Array<number> = [2, 3];
+    const list: List<number> = new List(testList);
+
+    const addItem = 1;
+
+    list.unshift();
+    expect(list.Len()).toEqual(3);
+
+    expect(list.indexOf(addItem)).toEqual(0);
+  });
+
+  test("returns new array", () => {
+    const testList: Array<number> = [2, 3];
+    const list: List<number> = new List(testList);
+
+    expect(list.shift()).toEqual([1, ...testList]);
   });
 });
